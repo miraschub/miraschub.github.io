@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mira Schubert | College Counseling & Tutoring</title>
+    
+    <!-- Fonts: Lora for elegant, bold headings; Inter for highly readable body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for rapid styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#FAF9F6', // Soft off-white
+                        primary: '#1C1C1C',    // Near black
+                        accent: '#E8DCC4',     // Soft beige/sand
+                        accentDark: '#C7B595'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Fade In Animation Styles */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, visibility;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Custom selection color */
+        ::selection {
+            background: #E8DCC4;
+            color: #1C1C1C;
+        }
+
+        /* Smooth mobile menu transition */
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        #mobile-menu.active {
+            max-height: 400px;
+            opacity: 1;
+            padding-bottom: 2rem;
+        }
+
+        /* Nav Link Underline Hover Effect */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: #C7B595;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-background text-primary font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-background/80 backdrop-blur-md border-b border-gray-200/50 py-4" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="font-serif font-bold text-xl tracking-tight hover:opacity-70 transition-opacity">Mira Schubert.</a>
+            <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
+                <a href="#about" class="nav-link hover:text-accentDark transition-colors">About</a>
+                <a href="#services" class="nav-link hover:text-accentDark transition-colors">Services</a>
+                <a href="#contact" class="nav-link hover:text-accentDark transition-colors">Contact</a>
+                <a href="miraresume.pdf" target="_blank" class="nav-link hover:text-accentDark transition-colors">Resume</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-2xl p-2 focus:outline-none" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Nav Menu -->
+        <div class="md:hidden absolute top-full left-0 w-full bg-background border-b border-gray-200/50 shadow-xl flex flex-col items-center gap-6" id="mobile-menu">
+            <a href="#about" class="text-lg font-medium pt-4 mobile-link">About</a>
+            <a href="#services" class="text-lg font-medium mobile-link">Services</a>
+            <a href="#contact" class="text-lg font-medium mobile-link">Contact</a>
+            <a href="miraresume.pdf" target="_blank" class="text-lg font-medium mobile-link">Resume</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen pt-24 pb-16 md:pt-32 md:pb-20 px-6 flex items-center relative" id="hero">
+        <div class="max-w-6xl mx-auto w-full grid md:grid-cols-12 gap-12 items-center">
+            
+            <div class="md:col-span-7 order-2 md:order-1 fade-in-section">
+                <p class="text-accentDark font-medium tracking-wider uppercase text-xs md:text-sm mb-4">College Counseling & Academic Tutoring</p>
+                <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl font-bold leading-[1.1] mb-6 text-primary tracking-tighter">
+                    Mira <br class="hidden md:block"/> Schubert
+                </h1>
+                <p class="text-lg md:text-2xl font-light text-gray-600 mb-10 max-w-lg leading-relaxed">
+                    Personalized guidance and academic support from a current Princeton University student.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="inline-block text-center bg-primary text-white px-8 py-4 rounded-full font-medium tracking-wide hover:bg-gray-800 hover:scale-105 transition-all hover:shadow-2xl">
+                        Book a Session
+                    </a>
+                    <a href="#about" class="inline-block text-center bg-transparent border border-gray-300 text-primary px-8 py-4 rounded-full font-medium tracking-wide hover:border-primary hover:bg-primary/5 hover:scale-105 transition-all">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+
+            <div class="md:col-span-5 order-1 md:order-2 fade-in-section relative">
+                <div class="relative w-56 h-56 sm:w-64 sm:h-64 md:w-[26rem] md:h-[26rem] mx-auto group">
+                    <!-- Decorative background element - shifts opposite to the image on hover -->
+                    <div class="absolute inset-0 bg-accent rounded-full transform translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4 group-hover:translate-x-6 group-hover:translate-y-6 group-hover:scale-105 transition-all duration-500 ease-out"></div>
+                    
+                    <!-- Headshot Linked to LinkedIn -->
+                    <a href="https://www.linkedin.com/in/mira-schubert" target="_blank" class="block w-full h-full relative z-10">
+                        <img src="miraheadshot.png" alt="Mira Schubert" 
+                             class="relative w-full h-full object-cover rounded-full shadow-2xl border-4 border-white grayscale-[10%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 ease-out cursor-pointer"
+                             onerror="this.src='https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Scroll indicator -->
+        <a href="#about" class="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-gray-400 hover:text-primary transition-colors hidden sm:block">
+            <i class="fa-solid fa-arrow-down animate-bounce text-xl"></i>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 md:py-24 px-6 bg-white" id="about">
+        <div class="max-w-4xl mx-auto fade-in-section">
+            <h2 class="font-serif text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-primary">About Me</h2>
+            
+            <div class="prose prose-base md:prose-xl max-w-none text-gray-700 font-light leading-relaxed space-y-6 md:space-y-8">
+                <p>
+                    <strong class="font-medium text-primary">Mira is a freshman at Princeton University</strong> studying Mechanical and Aerospace Engineering with a minor in Creative Writing. 
+                </p>
+                <p>
+                    She graduated high school with a <strong>3.96 GPA</strong> and a <strong>1560 SAT score</strong>, and was admitted to multiple highly selective programs, including the prestigious <em>Iowa Young Writers' Workshop</em> and the <em>Kenyon Young Writers' Studio</em>.
+                </p>
+                <p>
+                    In high school, Mira served as Upper School President, led multiple student organizations, and worked closely with nonprofits and national organizations. She has extensive experience mentoring others—having taught Python classes, tutored students in both math and English, and worked as a camp counselor for children.
+                </p>
+            </div>
+
+            <div class="mt-10 md:mt-12 flex justify-center">
+                <a href="miraresume.pdf" target="_blank" class="group flex items-center gap-3 text-lg font-medium border-b-2 border-accent hover:border-primary pb-1 transition-all">
+                    <span>View Full Resume</span>
+                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-3 transition-transform duration-300"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-20 md:py-24 px-6 bg-background" id="services">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-serif text-3xl md:text-5xl font-bold mb-12 md:mb-16 text-center fade-in-section">Areas of Expertise</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                
+                <!-- Service Card 1 -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-4 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 fade-in-section group">
+                    <div class="w-12 h-12 bg-accent/30 text-accentDark rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-4">College Application Strategy</h3>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        Comprehensive guidance on building a balanced college list, positioning your narrative, and navigating the admissions landscape.
+                    </p>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-4 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 fade-in-section group">
+                    <div class="w-12 h-12 bg-accent/30 text-accentDark rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-4">Essay Editing</h3>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        Brainstorming, drafting, and polishing the Common App personal statement and school-specific supplemental essays.
+                    </p>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-4 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 fade-in-section group">
+                    <div class="w-12 h-12 bg-accent/30 text-accentDark rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-4">Leadership Profiles</h3>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        Strategic advice on building meaningful extracurricular profiles and developing authentic leadership experiences.
+                    </p>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-4 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 fade-in-section group">
+                    <div class="w-12 h-12 bg-accent/30 text-accentDark rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
+                        <i class="fa-solid fa-sun"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-4">Summer Programs</h3>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        Assistance with identifying and applying to highly selective summer programs and meaningful internships.
+                    </p>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-4 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 fade-in-section md:col-span-2 lg:col-span-1 group">
+                    <div class="w-12 h-12 bg-accent/30 text-accentDark rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-4">Academic Tutoring</h3>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        Targeted subject tutoring with a focus on English reading/writing, fundamental mathematics, and Python programming.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-24 md:py-32 px-6 bg-primary text-white text-center" id="contact">
+        <div class="max-w-6xl mx-auto fade-in-section">
+            
+            <h2 class="font-serif text-4xl md:text-7xl font-bold mb-6 md:mb-8 leading-tight">Let's work together.</h2>
+            <p class="text-gray-400 text-base md:text-2xl font-light mb-12 max-w-2xl mx-auto leading-relaxed px-4">
+                Whether you're starting your college journey or need help fine-tuning your essays, I'd love to help you reach your goals. 
+                <span class="text-accent block mt-4 font-medium">Reach out via email, phone, or LinkedIn to get started.</span>
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 items-center justify-items-center text-lg md:text-xl">
+                <!-- Email -->
+                <a href="mailto:mirazschubert@gmail.com" class="group flex flex-row items-center gap-4 hover:text-accent transition-all duration-300 w-full max-w-[280px] md:max-w-none md:justify-center">
+                    <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 border border-gray-600 rounded-full flex items-center justify-center group-hover:border-accent group-hover:scale-110 group-hover:bg-accent/10 transition-all duration-300">
+                        <i class="fa-regular fa-envelope text-xl md:text-2xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mb-0.5 md:mb-1 group-hover:text-accent transition-colors">Email</p>
+                        <p class="font-medium text-sm md:text-lg break-all">mirazschubert@gmail.com</p>
+                    </div>
+                </a>
+                
+                <!-- Phone -->
+                <a href="tel:+19294048295" class="group flex flex-row items-center gap-4 hover:text-accent transition-all duration-300 w-full max-w-[280px] md:max-w-none md:justify-center">
+                    <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 border border-gray-600 rounded-full flex items-center justify-center group-hover:border-accent group-hover:scale-110 group-hover:bg-accent/10 transition-all duration-300">
+                        <i class="fa-solid fa-phone text-xl md:text-2xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mb-0.5 md:mb-1 group-hover:text-accent transition-colors">Phone</p>
+                        <p class="font-medium text-sm md:text-lg">+1 (929) 404-8295</p>
+                    </div>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/mira-schubert" target="_blank" class="group flex flex-row items-center gap-4 hover:text-accent transition-all duration-300 w-full max-w-[280px] md:max-w-none md:justify-center">
+                    <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 border border-gray-600 rounded-full flex items-center justify-center group-hover:border-accent group-hover:scale-110 group-hover:bg-accent/10 transition-all duration-300">
+                        <i class="fa-brands fa-linkedin-in text-xl md:text-2xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mb-0.5 md:mb-1 group-hover:text-accent transition-colors">LinkedIn</p>
+                        <p class="font-medium text-sm md:text-lg">mira-schubert</p>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary border-t border-white/10 py-10 text-center px-6">
+        <p class="text-gray-400 font-light text-[10px] md:text-sm tracking-wide">
+            &copy; 2026 MIRA SCHUBERT | PRINCETON UNIVERSITY STUDENT
+        </p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Menu Logic ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if(mobileMenu.classList.contains('active')){
+                    icon.classList.replace('fa-bars', 'fa-xmark');
+                } else {
+                    icon.classList.replace('fa-xmark', 'fa-bars');
+                }
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+                });
+            });
+
+            // --- Scroll Fade-in Animation ---
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            const appearOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -40px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, appearOptions);
+
+            fadeElements.forEach(el => {
+                appearOnScroll.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
