@@ -1,353 +1,643 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mira Schubert | College Counseling & Tutoring</title>
-    
-    <!-- Fonts: Lora for elegant, bold headings; Inter for highly readable body text -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Tailwind CSS for rapid styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        background: '#FAF9F6', // Soft off-white
-                        primary: '#1C1C1C',    // Near black
-                        accent: '#E8DCC4',     // Soft beige/sand
-                        accentDark: '#C7B595'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Lora', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        /* Fade In Animation Styles */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, visibility;
-        }
-        
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: none;
-        }
-
-        /* Custom selection color */
-        ::selection {
-            background: #E8DCC4;
-            color: #1C1C1C;
-        }
-
-        /* Smooth mobile menu transition */
-        #mobile-menu {
-            transition: all 0.3s ease-in-out;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-        }
-        #mobile-menu.active {
-            max-height: 400px;
-            opacity: 1;
-            padding-bottom: 2rem;
-        }
-
-        /* Nav Link Underline Hover Effect */
-        .nav-link {
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -4px;
-            left: 0;
-            background-color: #C7B595;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
-<body class="bg-background text-primary font-sans antialiased overflow-x-hidden">
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Mira Schubert — College Counseling and Writing">
+<meta property="og:description" content="Princeton student in finance, investing, and writing — investment research, leadership, and selected writing.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="uploads/bg.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="uploads/bg.png">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#F1EADB;color:#1A1815;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;--accent:#C2693F}
+::selection{background:var(--accent);color:#F1EADB}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@media (max-width:760px){[data-nav-links]{display:none!important}[data-nav-toggle]{display:flex!important}[data-svc-tag]{display:none!important}[data-hero-photo]{justify-self:center!important;max-width:340px!important}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="position:relative;min-height:100vh;font-family:'Spectral',Georgia,serif;color:#1A1815;overflow-x:hidden">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-background/80 backdrop-blur-md border-b border-gray-200/50 py-4" id="navbar">
-        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
-            <a href="#" class="font-serif font-bold text-xl tracking-tight hover:opacity-70 transition-opacity">Mira Schubert.</a>
-            <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
-                <a href="#about" class="nav-link hover:text-accentDark transition-colors">About</a>
-                <a href="#services" class="nav-link hover:text-accentDark transition-colors">Services</a>
-                <a href="#contact" class="nav-link hover:text-accentDark transition-colors">Contact</a>
-                <a href="miraresume.pdf" target="_blank" class="nav-link hover:text-accentDark transition-colors">Resume</a>
-            </div>
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-2xl p-2 focus:outline-none" id="mobile-menu-btn" aria-label="Toggle Menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
-        <!-- Mobile Nav Menu -->
-        <div class="md:hidden absolute top-full left-0 w-full bg-background border-b border-gray-200/50 shadow-xl flex flex-col items-center gap-6" id="mobile-menu">
-            <a href="#about" class="text-lg font-medium pt-4 mobile-link">About</a>
-            <a href="#services" class="text-lg font-medium mobile-link">Services</a>
-            <a href="#contact" class="text-lg font-medium mobile-link">Contact</a>
-            <a href="miraresume.pdf" target="_blank" class="text-lg font-medium mobile-link">Resume</a>
-        </div>
-    </nav>
+  <div data-progress style="position:fixed;top:0;left:0;right:0;height:2px;background:var(--accent,#C2693F);transform:scaleX(0);transform-origin:left;z-index:90"></div>
+  <div data-grain aria-hidden="true" style="position:fixed;inset:0;z-index:75;pointer-events:none;opacity:0.45;mix-blend-mode:multiply"></div>
+  <div data-cross aria-hidden="true" style="position:fixed;z-index:70;pointer-events:none;opacity:0;transform:translate(-50%,-50%);transition:opacity .3s;mix-blend-mode:multiply">
+    <div style="position:absolute;left:-13px;top:0;width:26px;height:1px;background:var(--accent,#C2693F)"></div>
+    <div style="position:absolute;top:-13px;left:0;width:1px;height:26px;background:var(--accent,#C2693F)"></div>
+  </div>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen pt-24 pb-16 md:pt-32 md:pb-20 px-6 flex items-center relative" id="hero">
-        <div class="max-w-6xl mx-auto w-full grid md:grid-cols-12 gap-12 items-center">
-            
-            <div class="md:col-span-7 order-2 md:order-1 fade-in-section">
-                <p class="text-accentDark font-medium tracking-wider uppercase text-xs md:text-sm mb-4">College Counseling & Academic Tutoring</p>
-                <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl font-bold leading-[1.1] mb-6 text-primary tracking-tighter">
-                    Mira <br class="hidden md:block"/> Schubert
-                </h1>
-                <p class="text-lg md:text-2xl font-light text-gray-600 mb-10 max-w-lg leading-relaxed">
-                    Personalized guidance and academic support from a current Princeton University student.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" class="inline-block text-center bg-primary text-white px-8 py-4 rounded-full font-medium tracking-wide hover:bg-gray-800 hover:scale-105 transition-all hover:shadow-2xl">
-                        Book a Session
-                    </a>
-                    <a href="#about" class="inline-block text-center bg-transparent border border-gray-300 text-primary px-8 py-4 rounded-full font-medium tracking-wide hover:border-primary hover:bg-primary/5 hover:scale-105 transition-all">
-                        Learn More
-                    </a>
-                </div>
-            </div>
+  <nav style="position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,4vw,56px);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;background:rgba(241,234,219,0.74);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border-bottom:1px solid rgba(26,24,21,0.12)">
+    <a href="#top" style="color:#1A1815;text-decoration:none;font-weight:600;letter-spacing:0.16em">MIRA SCHUBERT</a>
+    <div data-nav-links style="display:flex;gap:clamp(12px,2vw,30px);align-items:center">
+      <a href="#about" style="color:#1A1815;text-decoration:none" style-hover="color:var(--accent,#C2693F)">About</a>
+      <a href="#experience" style="color:#1A1815;text-decoration:none" style-hover="color:var(--accent,#C2693F)">Experience</a>
+      <a href="#tutoring" style="color:#1A1815;text-decoration:none" style-hover="color:var(--accent,#C2693F)">Tutoring</a>
+      <a href="#writing" style="color:#1A1815;text-decoration:none" style-hover="color:var(--accent,#C2693F)">Writing</a>
+      <a href="#contact" style="color:#1A1815;text-decoration:none" style-hover="color:var(--accent,#C2693F)">Contact</a>
+      <a href="miraresume.pdf" target="_blank" rel="noopener" style="color:var(--accent,#C2693F);text-decoration:none">Resume ↗</a>
+    </div>
+    <button data-nav-toggle aria-label="Open menu" style="display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px"><span style="display:block;width:24px;height:2px;background:#1A1815"></span><span style="display:block;width:24px;height:2px;background:#1A1815"></span><span style="display:block;width:24px;height:2px;background:#1A1815"></span></button>
+  </nav>
+  <div data-nav-overlay aria-hidden="true" style="position:fixed;inset:0;z-index:95;background:#F1EADB;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .35s,transform .35s"><button data-nav-close aria-label="Close menu" style="position:absolute;top:18px;right:22px;background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#1A1815;cursor:pointer">Close ✕</button><a href="#about" style="font-family:'Spectral',serif;font-size:clamp(2.2rem,10vw,3.2rem);color:#1A1815;text-decoration:none;padding:6px 0" style-hover="color:var(--accent,#C2693F)">About</a><a href="#experience" style="font-family:'Spectral',serif;font-size:clamp(2.2rem,10vw,3.2rem);color:#1A1815;text-decoration:none;padding:6px 0" style-hover="color:var(--accent,#C2693F)">Experience</a><a href="#tutoring" style="font-family:'Spectral',serif;font-size:clamp(2.2rem,10vw,3.2rem);color:#1A1815;text-decoration:none;padding:6px 0" style-hover="color:var(--accent,#C2693F)">Tutoring</a><a href="#writing" style="font-family:'Spectral',serif;font-size:clamp(2.2rem,10vw,3.2rem);color:#1A1815;text-decoration:none;padding:6px 0" style-hover="color:var(--accent,#C2693F)">Writing</a><a href="#contact" style="font-family:'Spectral',serif;font-size:clamp(2.2rem,10vw,3.2rem);color:#1A1815;text-decoration:none;padding:6px 0" style-hover="color:var(--accent,#C2693F)">Contact</a><a href="miraresume.pdf" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent,#C2693F);text-decoration:none;margin-top:16px">Resume ↗</a></div>
 
-            <div class="md:col-span-5 order-1 md:order-2 fade-in-section relative">
-                <div class="relative w-56 h-56 sm:w-64 sm:h-64 md:w-[26rem] md:h-[26rem] mx-auto group">
-                    <!-- Decorative background element - shifts opposite to the image on hover -->
-                    <div class="absolute inset-0 bg-accent rounded-full transform translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4 group-hover:translate-x-6 group-hover:translate-y-6 group-hover:scale-105 transition-all duration-500 ease-out"></div>
-                    
-                    <!-- Headshot Linked to LinkedIn -->
-                    <a href="https://www.linkedin.com/in/mira-schubert" target="_blank" class="block w-full h-full relative z-10">
-                        <img src="miraheadshot.png" alt="Mira Schubert" 
-                             class="relative w-full h-full object-cover rounded-full shadow-2xl border-4 border-white grayscale-[10%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 ease-out cursor-pointer"
-                             onerror="this.src='https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
-                    </a>
-                </div>
-            </div>
-            
+  <section id="top" data-hero data-screen-label="Hero" style="position:relative;min-height:100vh;display:flex;align-items:center;padding:120px clamp(20px,5vw,80px) 90px;overflow:hidden">
+    <canvas ref="{{ canvasRef }}" style="position:absolute;inset:0;z-index:0;width:100%;height:100%"></canvas>
+    <div data-coord style="position:absolute;left:clamp(20px,5vw,80px);bottom:34px;z-index:3;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;color:#6E6356"></div>
+    <div style="position:absolute;right:clamp(20px,5vw,80px);bottom:34px;z-index:3;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#6E6356;display:flex;align-items:center;gap:8px"><span>SCROLL</span><span style="animation:nudge 1.7s ease-in-out infinite;display:inline-block">↓</span></div>
+    <div style="position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:clamp(28px,4vw,64px);align-items:center;width:100%;max-width:1320px;margin:0 auto">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:26px;display:flex;gap:14px;flex-wrap:wrap"><span style="color:var(--accent,#C2693F)">40.3431°N 74.6551°W</span><span style="color:#6E6356">/ PRINCETON, NJ</span></div>
+        <h1 style="margin:0;font-weight:500;line-height:0.9;font-size:clamp(3rem,9.5vw,8.6rem);letter-spacing:-0.02em"><span data-word style="display:inline-block">Mira</span><br><span data-word style="display:inline-block;font-style:italic;font-weight:400">Schubert</span></h1>
+        <div style="margin-top:28px;font-family:'IBM Plex Mono',monospace;font-size:clamp(13px,1.5vw,17px);letter-spacing:0.01em;color:#1A1815;min-height:1.4em"><span data-type-out>Aerospace engineer. Writer. College counselor.</span><span data-cursor style="display:inline-block;width:0.55ch;animation:blink 1.1s steps(1) infinite;color:var(--accent,#C2693F)">▍</span></div>
+        <div style="margin-top:40px;display:flex;gap:14px;flex-wrap:wrap">
+          <a data-magnetic href="#contact" style="display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:15px 28px;background:#1A1815;color:#F1EADB;text-decoration:none;border-radius:1px;transition:background .3s,transform .2s" style-hover="background:var(--accent,#C2693F)">Book a session →</a>
+          <a data-magnetic href="#writing" style="display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:15px 28px;border:1px solid rgba(26,24,21,0.4);color:#1A1815;text-decoration:none;border-radius:1px;transition:border-color .3s,color .3s,transform .2s" style-hover="border-color:var(--accent,#C2693F);color:var(--accent,#C2693F)">Read my writing</a>
         </div>
-        
-        <!-- Scroll indicator -->
-        <a href="#about" class="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-gray-400 hover:text-primary transition-colors hidden sm:block">
-            <i class="fa-solid fa-arrow-down animate-bounce text-xl"></i>
+      </div>
+      <div data-hero-photo style="justify-self:end;width:100%;max-width:380px">
+        <div style="position:relative">
+          <div style="position:absolute;top:-7px;left:-7px;width:16px;height:16px;border-top:1px solid rgba(26,24,21,0.5);border-left:1px solid rgba(26,24,21,0.5)"></div>
+          <div style="position:absolute;top:-7px;right:-7px;width:16px;height:16px;border-top:1px solid rgba(26,24,21,0.5);border-right:1px solid rgba(26,24,21,0.5)"></div>
+          <div style="position:absolute;bottom:21px;left:-7px;width:16px;height:16px;border-bottom:1px solid rgba(26,24,21,0.5);border-left:1px solid rgba(26,24,21,0.5)"></div>
+          <div style="position:absolute;bottom:21px;right:-7px;width:16px;height:16px;border-bottom:1px solid rgba(26,24,21,0.5);border-right:1px solid rgba(26,24,21,0.5)"></div>
+          <div style="position:relative;overflow:hidden;background:#E4D8C0">
+            <img src="miraheadshot.png" alt="Mira Schubert" style="display:block;width:100%;filter:grayscale(1) contrast(1.06) brightness(1.05) sepia(0.32) saturate(1.25)"/>
+            <div style="position:absolute;inset:0;background:var(--accent,#C2693F);mix-blend-mode:color;opacity:0.42;pointer-events:none"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(26,24,21,0.28));pointer-events:none"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#6E6356"><span>FIG.01</span><span>M. SCHUBERT</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" data-screen-label="About" style="position:relative;z-index:2;scroll-margin-top:84px;padding:clamp(80px,12vh,150px) clamp(20px,5vw,80px);border-top:1px solid rgba(26,24,21,0.14)">
+    <div style="max-width:1320px;margin:0 auto">
+      <div data-reveal style="display:flex;align-items:baseline;gap:18px;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:40px"><span style="color:var(--accent,#C2693F)">01</span><span style="flex:1;height:1px;background:rgba(26,24,21,0.2)"></span><span style="color:#6E6356">About</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:clamp(32px,5vw,80px);align-items:start">
+        <div>
+          <p data-reveal style="font-size:clamp(1.7rem,3.2vw,2.7rem);line-height:1.18;font-weight:400;margin:0 0 32px;letter-spacing:-0.01em">Engineering by training — drawn to finance, investing, and the craft of <span style="font-style:italic;color:var(--accent,#C2693F)">writing.</span></p>
+        </div>
+        <div>
+          <p data-reveal style="font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.65;color:#3A332A;margin:0 0 22px">I'm a student at <span style="font-style:italic">Princeton University</span> interested in <span style="font-style:italic">finance, investing, and writing.</span></p>
+          <p data-reveal data-delay="80" style="font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.65;color:#3A332A;margin:0">Through experience in investment research, student leadership, and campus organizations, I enjoy analyzing complex problems, communicating ideas clearly, and building a strong foundation across business and the humanities.</p>
+        </div>
+      </div>
+
+      <div data-reveal style="margin-top:clamp(48px,7vw,90px)">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#6E6356;margin-bottom:22px">Affiliations &amp; honors</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:14px">
+          <div style="position:relative;padding:30px 26px;border:1px solid rgba(26,24,21,0.16);background:#EFE6D5">
+            <span style="position:absolute;top:6px;left:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┌</span><span style="position:absolute;top:6px;right:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┐</span><span style="position:absolute;bottom:6px;left:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">└</span><span style="position:absolute;bottom:6px;right:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┘</span>
+            <div style="width:52px;height:52px;border:1px solid rgba(26,24,21,0.18);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent,#C2693F);margin-bottom:16px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.4v5.1c0 4.2-2.9 7.8-7 9.1-4.1-1.3-7-4.9-7-9.1V5.4L12 3z"/><path d="M8.8 10.2L12 13.4l3.2-3.2"/></svg></div><div data-scramble style="font-family:'IBM Plex Mono',monospace;font-weight:600;letter-spacing:0.06em;font-size:15px;margin-bottom:8px">PRINCETON UNIV.</div>
+            <div style="font-style:italic;color:#6E6356;font-size:0.96rem;line-height:1.4">Mechanical &amp; Aerospace Eng. · Creative Writing</div>
+          </div>
+          <div style="position:relative;padding:30px 26px;border:1px solid rgba(26,24,21,0.16);background:#EFE6D5">
+            <span style="position:absolute;top:6px;left:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┌</span><span style="position:absolute;top:6px;right:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┐</span><span style="position:absolute;bottom:6px;left:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">└</span><span style="position:absolute;bottom:6px;right:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┘</span>
+            <div style="width:52px;height:52px;border:1px solid rgba(26,24,21,0.18);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent,#C2693F);margin-bottom:16px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l1.6 10.5L12 20l-4.6-5.5L9 4z"/><path d="M12 4v16"/><circle cx="12" cy="12.4" r="1.2"/></svg></div><div data-scramble style="font-family:'IBM Plex Mono',monospace;font-weight:600;letter-spacing:0.06em;font-size:15px;margin-bottom:8px">IOWA YWW</div>
+            <div style="font-style:italic;color:#6E6356;font-size:0.96rem;line-height:1.4">Iowa Young Writers' Workshop · 2023</div>
+          </div>
+          <div style="position:relative;padding:30px 26px;border:1px solid rgba(26,24,21,0.16);background:#EFE6D5">
+            <span style="position:absolute;top:6px;left:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┌</span><span style="position:absolute;top:6px;right:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┐</span><span style="position:absolute;bottom:6px;left:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">└</span><span style="position:absolute;bottom:6px;right:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┘</span>
+            <div style="width:52px;height:52px;border:1px solid rgba(26,24,21,0.18);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent,#C2693F);margin-bottom:16px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4C10 5.5 5.5 11 5 19"/><path d="M19.5 4.5c-1 7.5-5.5 11.5-12 12.5"/><path d="M8 16l-4 4"/></svg></div><div data-scramble style="font-family:'IBM Plex Mono',monospace;font-weight:600;letter-spacing:0.06em;font-size:15px;margin-bottom:8px">KENYON YWS</div>
+            <div style="font-style:italic;color:#6E6356;font-size:0.96rem;line-height:1.4">Kenyon Young Writers' Studio · 2024</div>
+          </div>
+          <div style="position:relative;padding:30px 26px;border:1px solid rgba(26,24,21,0.16);background:#EFE6D5">
+            <span style="position:absolute;top:6px;left:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┌</span><span style="position:absolute;top:6px;right:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┐</span><span style="position:absolute;bottom:6px;left:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">└</span><span style="position:absolute;bottom:6px;right:8px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F)">┘</span>
+            <div style="width:52px;height:52px;border:1px solid rgba(26,24,21,0.18);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent,#C2693F);margin-bottom:16px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h11v14H5z"/><path d="M16 9h3v8.5a1.5 1.5 0 01-3 0V5"/><path d="M8 8.5h5M8 11.5h5M8 14.5h3"/></svg></div><div data-scramble style="font-family:'IBM Plex Mono',monospace;font-weight:600;letter-spacing:0.06em;font-size:15px;margin-bottom:8px">NASSAU WEEKLY</div>
+            <div style="font-style:italic;color:#6E6356;font-size:0.96rem;line-height:1.4">Contributing writer · Poetry &amp; Fiction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" data-screen-label="Experience" style="position:relative;z-index:2;scroll-margin-top:84px;padding:clamp(80px,12vh,150px) clamp(20px,5vw,80px);border-top:1px solid rgba(26,24,21,0.14)">
+    <div style="max-width:1320px;margin:0 auto">
+      <div data-reveal style="display:flex;align-items:baseline;gap:18px;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:40px"><span style="color:var(--accent,#C2693F)">02</span><span style="flex:1;height:1px;background:rgba(26,24,21,0.2)"></span><span style="color:#6E6356">Experience</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:clamp(36px,5vw,52px)">
+        <h2 data-reveal style="margin:0;font-size:clamp(2.4rem,5vw,4rem);font-weight:500;line-height:1.02;letter-spacing:-0.02em">Experience &amp; leadership</h2>
+        <p data-reveal data-delay="80" style="margin:0;font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.6;color:#3A332A">Selected roles across cybersecurity research, investing, and advocacy.</p>
+      </div>
+
+      <div style="border-bottom:1px solid rgba(26,24,21,0.14)">
+
+        <div data-reveal data-exp style="display:grid;grid-template-columns:52px 1fr;gap:clamp(16px,3vw,30px);padding:clamp(26px,3vw,38px) clamp(8px,2vw,22px);border-top:1px solid rgba(26,24,21,0.14);transition:background .35s" style-hover="background:#ECE2CF">
+          <div style="width:52px;height:52px;border:1px solid rgba(26,24,21,0.18);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent,#C2693F)"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v15h16"/><path d="M7.4 15.2l3.3-3.5 2.6 2.1 4.7-5.4"/><path d="M18 8.4h-2.6M18 8.4v2.6"/></svg></div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap"><h3 style="margin:0;font-size:clamp(1.4rem,2.6vw,2rem);font-weight:500;line-height:1.1">Tiger Capital Management</h3><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#6E6356;white-space:nowrap">OCT 2025 — PRESENT</span></div>
+            <div style="font-style:italic;color:var(--accent,#C2693F);font-size:clamp(1rem,1.3vw,1.12rem);margin-top:6px">Junior Analyst · Princeton, NJ</div>
+            <ul style="margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px">
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>One of 11 analysts admitted (~3%) to Princeton's premier student-run fund, managing $300K+ in assets.</li>
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>Pitch and debate equity recommendations on a 1–3 year horizon across a 6-week cycle.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div data-reveal data-exp style="display:grid;grid-template-columns:52px 1fr;gap:clamp(16px,3vw,30px);padding:clamp(26px,3vw,38px) clamp(8px,2vw,22px);border-top:1px solid rgba(26,24,21,0.14);transition:background .35s" style-hover="background:#ECE2CF">
+          <div style="width:52px;height:52px;border:1px solid rgba(26,24,21,0.18);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent,#C2693F)"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2l8.3 6-3.2 9.8H6.9L3.7 9.2 12 3.2z"/><path d="M12 8.7l1 2 2.2.2-1.7 1.5.5 2.1-2-1.1-2 1.1.5-2.1-1.7-1.5 2.2-.2 1-2z"/></svg></div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap"><h3 style="margin:0;font-size:clamp(1.4rem,2.6vw,2rem);font-weight:500;line-height:1.1">Department of Defense</h3><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#6E6356;white-space:nowrap">JUN 2023 — AUG 2025</span></div>
+            <div style="font-style:italic;color:var(--accent,#C2693F);font-size:clamp(1rem,1.3vw,1.12rem);margin-top:6px">Cyber Analyst Intern · Remote</div>
+            <ul style="margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px">
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>Authored 3 research papers on cybersecurity mitigations adopted for laboratory-wide use.</li>
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>Presented technical vulnerability findings to 50+ cyber analysts biannually.</li>
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>Built 9+ security projects — a Python keylogger, CAN bus visualizer, and Wi-Fi sniffer.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div data-reveal data-exp style="display:grid;grid-template-columns:52px 1fr;gap:clamp(16px,3vw,30px);padding:clamp(26px,3vw,38px) clamp(8px,2vw,22px);border-top:1px solid rgba(26,24,21,0.14);transition:background .35s" style-hover="background:#ECE2CF">
+          <div style="width:52px;height:52px;border:1px solid rgba(26,24,21,0.18);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent,#C2693F)"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5v15M7 19.5h10M5 8.5h14"/><path d="M9 6l3-1.5L15 6"/><path d="M5 8.5l-2.2 4.2a2.6 2.6 0 005.2 0L5 8.5z"/><path d="M19 8.5l-2.2 4.2a2.6 2.6 0 005.2 0L19 8.5z"/></svg></div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap"><h3 style="margin:0;font-size:clamp(1.4rem,2.6vw,2rem);font-weight:500;line-height:1.1">Encode Justice NY</h3><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#6E6356;white-space:nowrap">SEP 2022 — 2025</span></div>
+            <div style="font-style:italic;color:var(--accent,#C2693F);font-size:clamp(1rem,1.3vw,1.12rem);margin-top:6px">Director of Political Advocacy · New York, NY</div>
+            <ul style="margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px">
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>Reached 7,000+ people advocating for ethical AI through social campaigns and a self-organized hackathon.</li>
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>Presented ethical-AI research to 4,000+ attendees at the New York AI Summit.</li>
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>Helped ban facial recognition in NY public schools with the Privacy NY Coalition &amp; NYCLU.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div data-reveal data-exp style="display:grid;grid-template-columns:52px 1fr;gap:clamp(16px,3vw,30px);padding:clamp(26px,3vw,38px) clamp(8px,2vw,22px);border-top:1px solid rgba(26,24,21,0.14);transition:background .35s" style-hover="background:#ECE2CF">
+          <div style="width:52px;height:52px;border:1px solid rgba(26,24,21,0.18);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--accent,#C2693F)"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19.5a5.5 5.5 0 0111 0"/><path d="M16 5.6a3 3 0 010 5.4"/><path d="M17 14.6a5.5 5.5 0 013.5 4.9"/></svg></div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap"><h3 style="margin:0;font-size:clamp(1.4rem,2.6vw,2rem);font-weight:500;line-height:1.1">Brearley Student Government</h3><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#6E6356;white-space:nowrap">SEP 2021 — JUN 2025</span></div>
+            <div style="font-style:italic;color:var(--accent,#C2693F);font-size:clamp(1rem,1.3vw,1.12rem);margin-top:6px">Co-President, Upper School · The Brearley School</div>
+            <ul style="margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px">
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>Led 5 new initiatives, including leadership workshops and an alumni networking program.</li>
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>Managed 35+ student organizations as the primary liaison to the administration.</li>
+              <li style="position:relative;padding-left:20px;font-size:clamp(0.98rem,1.2vw,1.06rem);line-height:1.5;color:#3A332A"><span style="position:absolute;left:0;top:0;color:var(--accent,#C2693F);font-family:'IBM Plex Mono',monospace">›</span>Delivered weekly addresses on student affairs to an audience of 250+.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="tutoring" data-screen-label="Tutoring" style="position:relative;z-index:2;scroll-margin-top:84px;padding:clamp(80px,12vh,150px) clamp(20px,5vw,80px);border-top:1px solid rgba(26,24,21,0.14)">
+    <div style="max-width:1320px;margin:0 auto">
+      <div data-reveal style="display:flex;align-items:baseline;gap:18px;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:40px"><span style="color:var(--accent,#C2693F)">03</span><span style="flex:1;height:1px;background:rgba(26,24,21,0.2)"></span><span style="color:#6E6356">Tutoring</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:clamp(40px,5vw,64px)">
+        <h2 data-reveal style="margin:0;font-size:clamp(2.4rem,5vw,4rem);font-weight:500;line-height:1.02;letter-spacing:-0.02em">How I can help</h2>
+        <p data-reveal data-delay="80" style="margin:0;font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.6;color:#3A332A">Personalized guidance and academic support — I navigated the admissions process recently, and I remember exactly how it feels.</p>
+      </div>
+
+      <div data-svc style="border-bottom:1px solid rgba(26,24,21,0.14)">
+        <a href="#contact" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:52px 1fr auto;gap:clamp(14px,3vw,40px);align-items:start;padding:clamp(22px,2.6vw,32px) clamp(8px,2vw,22px);border-top:1px solid rgba(26,24,21,0.14);transition:background .35s,padding .35s" style-hover="background:#ECE2CF">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F);padding-top:8px">01</div>
+          <div><div style="font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:500;line-height:1.1">College Application Strategy</div><div style="font-style:italic;color:#6E6356;font-size:clamp(1rem,1.3vw,1.12rem);line-height:1.5;margin-top:8px;max-width:62ch">Comprehensive guidance on building a balanced college list, positioning your narrative, and navigating the admissions landscape.</div></div>
+          <div data-svc-tag style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--accent,#C2693F);white-space:nowrap;align-self:center">[ STRATEGY ]</div>
         </a>
-    </section>
+        <a href="#contact" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:52px 1fr auto;gap:clamp(14px,3vw,40px);align-items:start;padding:clamp(22px,2.6vw,32px) clamp(8px,2vw,22px);border-top:1px solid rgba(26,24,21,0.14);transition:background .35s,padding .35s" style-hover="background:#ECE2CF">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F);padding-top:8px">02</div>
+          <div><div style="font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:500;line-height:1.1">Essay Editing</div><div style="font-style:italic;color:#6E6356;font-size:clamp(1rem,1.3vw,1.12rem);line-height:1.5;margin-top:8px;max-width:62ch">Brainstorming, drafting, and polishing the Common App personal statement and school-specific supplemental essays.</div></div>
+          <div data-svc-tag style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--accent,#C2693F);white-space:nowrap;align-self:center">[ WRITING ]</div>
+        </a>
+        <a href="#contact" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:52px 1fr auto;gap:clamp(14px,3vw,40px);align-items:start;padding:clamp(22px,2.6vw,32px) clamp(8px,2vw,22px);border-top:1px solid rgba(26,24,21,0.14);transition:background .35s,padding .35s" style-hover="background:#ECE2CF">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F);padding-top:8px">03</div>
+          <div><div style="font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:500;line-height:1.1">Leadership Profiles</div><div style="font-style:italic;color:#6E6356;font-size:clamp(1rem,1.3vw,1.12rem);line-height:1.5;margin-top:8px;max-width:62ch">Strategic advice on building meaningful extracurricular profiles and developing authentic leadership experiences.</div></div>
+          <div data-svc-tag style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--accent,#C2693F);white-space:nowrap;align-self:center">[ PROFILE ]</div>
+        </a>
+        <a href="#contact" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:52px 1fr auto;gap:clamp(14px,3vw,40px);align-items:start;padding:clamp(22px,2.6vw,32px) clamp(8px,2vw,22px);border-top:1px solid rgba(26,24,21,0.14);transition:background .35s,padding .35s" style-hover="background:#ECE2CF">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F);padding-top:8px">04</div>
+          <div><div style="font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:500;line-height:1.1">Summer Programs</div><div style="font-style:italic;color:#6E6356;font-size:clamp(1rem,1.3vw,1.12rem);line-height:1.5;margin-top:8px;max-width:62ch">Identifying and applying to highly selective summer programs and meaningful internships.</div></div>
+          <div data-svc-tag style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--accent,#C2693F);white-space:nowrap;align-self:center">[ PROGRAMS ]</div>
+        </a>
+        <a href="#contact" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:52px 1fr auto;gap:clamp(14px,3vw,40px);align-items:start;padding:clamp(22px,2.6vw,32px) clamp(8px,2vw,22px);border-top:1px solid rgba(26,24,21,0.14);transition:background .35s,padding .35s" style-hover="background:#ECE2CF">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent,#C2693F);padding-top:8px">05</div>
+          <div><div style="font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:500;line-height:1.1">Academic Tutoring</div><div style="font-style:italic;color:#6E6356;font-size:clamp(1rem,1.3vw,1.12rem);line-height:1.5;margin-top:8px;max-width:62ch">Targeted subject tutoring in English reading and writing, fundamental mathematics, and Python programming.</div></div>
+          <div data-svc-tag style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--accent,#C2693F);white-space:nowrap;align-self:center">[ TUTORING ]</div>
+        </a>
+      </div>
+      <div data-reveal style="margin-top:clamp(36px,5vw,56px)">
+        <a data-magnetic href="#contact" style="display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:16px 32px;background:#1A1815;color:#F1EADB;text-decoration:none;border-radius:1px;transition:background .3s,transform .2s" style-hover="background:var(--accent,#C2693F)">Book a session →</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section class="py-20 md:py-24 px-6 bg-white" id="about">
-        <div class="max-w-4xl mx-auto fade-in-section">
-            <h2 class="font-serif text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-primary">About Me</h2>
-            
-            <div class="prose prose-base md:prose-xl max-w-none text-gray-700 font-light leading-relaxed space-y-6 md:space-y-8">
-                <p>
-                    <strong class="font-medium text-primary">Mira is a freshman at Princeton University</strong> studying Mechanical and Aerospace Engineering with a minor in Creative Writing. 
-                </p>
-                <p>
-                    She graduated high school with a <strong>3.96 GPA</strong> and a <strong>1560 SAT score</strong>, and was admitted to multiple highly selective programs, including the prestigious <em>Iowa Young Writers' Workshop</em> and the <em>Kenyon Young Writers' Studio</em>.
-                </p>
-                <p>
-                    In high school, Mira served as Upper School President, led multiple student organizations, and worked closely with nonprofits and national organizations. She has extensive experience mentoring others—having taught Python classes, tutored students in both math and English, and worked as a camp counselor for children.
-                </p>
-            </div>
+  <section id="writing" data-screen-label="Writing" style="position:relative;z-index:2;scroll-margin-top:84px;padding:clamp(80px,12vh,150px) clamp(20px,5vw,80px);border-top:1px solid rgba(26,24,21,0.14)">
+    <div style="max-width:1320px;margin:0 auto">
+      <div data-reveal style="display:flex;align-items:baseline;gap:18px;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:40px"><span style="color:var(--accent,#C2693F)">04</span><span style="flex:1;height:1px;background:rgba(26,24,21,0.2)"></span><span style="color:#6E6356">Writing</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:clamp(20px,4vw,64px);align-items:end;margin-bottom:clamp(40px,5vw,70px)">
+        <h2 data-reveal style="margin:0;font-size:clamp(2.4rem,5vw,4rem);font-weight:500;line-height:1.02;letter-spacing:-0.02em;font-style:italic">Selected writing</h2>
+        <p data-reveal data-delay="80" style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#6E6356;line-height:1.7">PUBLISHED IN NASSAU WEEKLY — PRINCETON'S ALTERNATIVE MAGAZINE SINCE 1976. CLICK ANY PIECE TO READ.</p>
+      </div>
 
-            <div class="mt-10 md:mt-12 flex justify-center">
-                <a href="miraresume.pdf" target="_blank" class="group flex items-center gap-3 text-lg font-medium border-b-2 border-accent hover:border-primary pb-1 transition-all">
-                    <span>View Full Resume</span>
-                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-3 transition-transform duration-300"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:clamp(28px,4vw,56px)">
+        <a data-writing-card data-reveal href="essays/death-is.dc.html" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .4s">
+          <div style="position:relative;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(26,24,21,0.16);background:#E4D8C0">
+            <img data-w-img src="https://nassauweekly.com/wp-content/uploads/ShubertMira_ReidRaven-scaled.png" alt="death is" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.04) brightness(1.03) sepia(0.25);transition:filter .55s,transform .6s;display:block"/>
+            <div data-w-ov style="position:absolute;inset:0;background:var(--accent,#C2693F);mix-blend-mode:color;opacity:0.35;transition:opacity .5s;pointer-events:none"></div>
+            <span style="position:absolute;top:12px;left:12px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;background:#1A1815;color:#F1EADB;padding:5px 9px">POETRY</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:18px;gap:16px"><h3 style="margin:0;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:500">death is</h3><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#6E6356;white-space:nowrap">APR 2026</span></div>
+          <p style="font-style:italic;color:#6E6356;font-size:1.05rem;line-height:1.55;margin:10px 0 0;max-width:58ch">a shadow between sponge-molded floorboards and marble countertops, a daffodil that's shrunken flattened against the ground, dismissed until dawn breaks…</p>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;color:var(--accent,#C2693F);margin-top:16px">READ →</span>
+        </a>
+        <a data-writing-card data-reveal data-delay="90" href="essays/still-race.dc.html" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .4s">
+          <div style="position:relative;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(26,24,21,0.16);background:#E4D8C0">
+            <img data-w-img src="https://nassauweekly.com/wp-content/uploads/Shubert-Mia_Choi-Ellie.jpg" alt="Still Race" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.04) brightness(1.03) sepia(0.25);transition:filter .55s,transform .6s;display:block"/>
+            <div data-w-ov style="position:absolute;inset:0;background:var(--accent,#C2693F);mix-blend-mode:color;opacity:0.35;transition:opacity .5s;pointer-events:none"></div>
+            <span style="position:absolute;top:12px;left:12px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;background:#1A1815;color:#F1EADB;padding:5px 9px">POETRY</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:18px;gap:16px"><h3 style="margin:0;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:500">Still Race</h3><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#6E6356;white-space:nowrap">FEB 2026</span></div>
+          <p style="font-style:italic;color:#6E6356;font-size:1.05rem;line-height:1.55;margin:10px 0 0;max-width:58ch">A burgundy ant scampers along an iron windowsill, weaves manically around bits of old dust as if they're skyscrapers…</p>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;color:var(--accent,#C2693F);margin-top:16px">READ →</span>
+        </a>
+        <a data-writing-card data-reveal href="essays/jazz.dc.html" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .4s">
+          <div style="position:relative;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(26,24,21,0.16);background:#E4D8C0">
+            <img data-w-img src="https://nassauweekly.com/wp-content/uploads/2025/11/Sara-shen-for-Schubert.jpeg" alt="Jazz" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.04) brightness(1.03) sepia(0.25);transition:filter .55s,transform .6s;display:block"/>
+            <div data-w-ov style="position:absolute;inset:0;background:var(--accent,#C2693F);mix-blend-mode:color;opacity:0.35;transition:opacity .5s;pointer-events:none"></div>
+            <span style="position:absolute;top:12px;left:12px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;background:#1A1815;color:#F1EADB;padding:5px 9px">POETRY</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:18px;gap:16px"><h3 style="margin:0;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:500">Jazz</h3><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#6E6356;white-space:nowrap">NOV 2025</span></div>
+          <p style="font-style:italic;color:#6E6356;font-size:1.05rem;line-height:1.55;margin:10px 0 0;max-width:58ch">We are in assembly. Voices intermingle with deep jazz that drips from speakers stationed all around the house. Something beneath my sternum vibrates silently…</p>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;color:var(--accent,#C2693F);margin-top:16px">READ →</span>
+        </a>
+        <a data-writing-card data-reveal data-delay="90" href="essays/vignette-on-lychees.dc.html" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .4s">
+          <div style="position:relative;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(26,24,21,0.16);background:#E4D8C0">
+            <img data-w-img src="https://nassauweekly.com/wp-content/uploads/2025/10/Lychee-drawing-pdf.jpg" alt="Vignette on Lychees" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.04) brightness(1.03) sepia(0.25);transition:filter .55s,transform .6s;display:block"/>
+            <div data-w-ov style="position:absolute;inset:0;background:var(--accent,#C2693F);mix-blend-mode:color;opacity:0.35;transition:opacity .5s;pointer-events:none"></div>
+            <span style="position:absolute;top:12px;left:12px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;background:#1A1815;color:#F1EADB;padding:5px 9px">FICTION</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:18px;gap:16px"><h3 style="margin:0;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:500">Vignette on Lychees</h3><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#6E6356;white-space:nowrap">OCT 2025</span></div>
+          <p style="font-style:italic;color:#6E6356;font-size:1.05rem;line-height:1.55;margin:10px 0 0;max-width:58ch">Giovanna lies sprawled on a lounge chair beside the pool, clutching a plastic bag of lychees. Her fingers interlace over her stomach; her nails are chipped crimson…</p>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;color:var(--accent,#C2693F);margin-top:16px">READ →</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Services Section -->
-    <section class="py-20 md:py-24 px-6 bg-background" id="services">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="font-serif text-3xl md:text-5xl font-bold mb-12 md:mb-16 text-center fade-in-section">Areas of Expertise</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                
-                <!-- Service Card 1 -->
-                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-4 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 fade-in-section group">
-                    <div class="w-12 h-12 bg-accent/30 text-accentDark rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-                    <h3 class="font-serif text-2xl font-bold mb-4">College Application Strategy</h3>
-                    <p class="text-gray-600 font-light leading-relaxed">
-                        Comprehensive guidance on building a balanced college list, positioning your narrative, and navigating the admissions landscape.
-                    </p>
-                </div>
+  <section id="contact" data-screen-label="Contact" style="position:relative;z-index:2;scroll-margin-top:84px;padding:clamp(80px,12vh,150px) clamp(20px,5vw,80px);border-top:1px solid rgba(26,24,21,0.14)">
+    <div style="max-width:1320px;margin:0 auto">
+      <div data-reveal style="display:flex;align-items:baseline;gap:18px;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:40px"><span style="color:var(--accent,#C2693F)">05</span><span style="flex:1;height:1px;background:rgba(26,24,21,0.2)"></span><span style="color:#6E6356">Contact</span></div>
+      <h2 data-reveal style="margin:0 0 28px;font-size:clamp(2.8rem,7vw,6rem);font-weight:500;line-height:0.98;letter-spacing:-0.02em">Let's work <span style="font-style:italic;color:var(--accent,#C2693F)">together.</span></h2>
+      <p data-reveal data-delay="80" style="margin:0 0 clamp(40px,5vw,64px);font-size:clamp(1.1rem,1.5vw,1.3rem);line-height:1.6;color:#3A332A;max-width:62ch">Whether you're starting your college journey or fine-tuning your essays, I'd love to help you reach your goals. Reach out by email, phone, or LinkedIn to get started.</p>
 
-                <!-- Service Card 2 -->
-                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-4 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 fade-in-section group">
-                    <div class="w-12 h-12 bg-accent/30 text-accentDark rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
-                        <i class="fa-solid fa-pen-nib"></i>
-                    </div>
-                    <h3 class="font-serif text-2xl font-bold mb-4">Essay Editing</h3>
-                    <p class="text-gray-600 font-light leading-relaxed">
-                        Brainstorming, drafting, and polishing the Common App personal statement and school-specific supplemental essays.
-                    </p>
-                </div>
+      <div data-reveal style="border-bottom:1px solid rgba(26,24,21,0.14)">
+        <a href="mailto:mirazschubert@gmail.com" style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;padding:clamp(20px,2.4vw,28px) 0;border-top:1px solid rgba(26,24,21,0.14);text-decoration:none;color:#1A1815;transition:color .3s,padding-left .3s" style-hover="color:var(--accent,#C2693F);padding-left:10px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#6E6356;text-transform:uppercase">Email</span>
+          <span style="font-size:clamp(1.2rem,3vw,2rem);font-weight:500">mirazschubert@gmail.com</span>
+        </a>
+        <a href="tel:+19294048295" style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;padding:clamp(20px,2.4vw,28px) 0;border-top:1px solid rgba(26,24,21,0.14);text-decoration:none;color:#1A1815;transition:color .3s,padding-left .3s" style-hover="color:var(--accent,#C2693F);padding-left:10px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#6E6356;text-transform:uppercase">Phone</span>
+          <span style="font-size:clamp(1.2rem,3vw,2rem);font-weight:500">+1 (929) 404-8295</span>
+        </a>
+        <a href="https://www.linkedin.com/in/mira-schubert" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;padding:clamp(20px,2.4vw,28px) 0;border-top:1px solid rgba(26,24,21,0.14);text-decoration:none;color:#1A1815;transition:color .3s,padding-left .3s" style-hover="color:var(--accent,#C2693F);padding-left:10px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#6E6356;text-transform:uppercase">LinkedIn</span>
+          <span style="font-size:clamp(1.2rem,3vw,2rem);font-weight:500">mira-schubert ↗</span>
+        </a>
+        <a href="miraresume.pdf" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;padding:clamp(20px,2.4vw,28px) 0;border-top:1px solid rgba(26,24,21,0.14);text-decoration:none;color:#1A1815;transition:color .3s,padding-left .3s" style-hover="color:var(--accent,#C2693F);padding-left:10px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#6E6356;text-transform:uppercase">Resume</span>
+          <span style="font-size:clamp(1.2rem,3vw,2rem);font-weight:500">resume.pdf ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-                <!-- Service Card 3 -->
-                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-4 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 fade-in-section group">
-                    <div class="w-12 h-12 bg-accent/30 text-accentDark rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
-                        <i class="fa-solid fa-users"></i>
-                    </div>
-                    <h3 class="font-serif text-2xl font-bold mb-4">Leadership Profiles</h3>
-                    <p class="text-gray-600 font-light leading-relaxed">
-                        Strategic advice on building meaningful extracurricular profiles and developing authentic leadership experiences.
-                    </p>
-                </div>
+  <footer style="position:relative;z-index:2;padding:36px clamp(20px,5vw,80px);border-top:1px solid rgba(26,24,21,0.14);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#6E6356;text-transform:uppercase">
+    <span>© 2026 Mira Schubert</span>
+    <span>Princeton University · MAE + Creative Writing</span>
+    <span>Scrolled <span data-scroll-pct>000</span>%</span>
+  </footer>
 
-                <!-- Service Card 4 -->
-                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-4 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 fade-in-section group">
-                    <div class="w-12 h-12 bg-accent/30 text-accentDark rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
-                        <i class="fa-solid fa-sun"></i>
-                    </div>
-                    <h3 class="font-serif text-2xl font-bold mb-4">Summer Programs</h3>
-                    <p class="text-gray-600 font-light leading-relaxed">
-                        Assistance with identifying and applying to highly selective summer programs and meaningful internships.
-                    </p>
-                </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C2693F&quot;,&quot;options&quot;:[&quot;#C2693F&quot;,&quot;#6E7B4F&quot;,&quot;#4A6670&quot;,&quot;#8A5A6A&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;showGrid&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  rootRef = React.createRef();
+  canvasRef = React.createRef();
 
-                <!-- Service Card 5 -->
-                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-4 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 fade-in-section md:col-span-2 lg:col-span-1 group">
-                    <div class="w-12 h-12 bg-accent/30 text-accentDark rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
-                    <h3 class="font-serif text-2xl font-bold mb-4">Academic Tutoring</h3>
-                    <p class="text-gray-600 font-light leading-relaxed">
-                        Targeted subject tutoring with a focus on English reading/writing, fundamental mathematics, and Python programming.
-                    </p>
-                </div>
+  renderVals() {
+    return { rootRef: this.rootRef, canvasRef: this.canvasRef };
+  }
 
-            </div>
-        </div>
-    </section>
+  hexToRgba(hex, a) {
+    let h = (hex || '#C2693F').replace('#', '');
+    if (h.length === 3) h = h.split('').map(c => c + c).join('');
+    const n = parseInt(h, 16);
+    return 'rgba(' + ((n >> 16) & 255) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+  }
 
-    <!-- Contact Section -->
-    <section class="py-24 md:py-32 px-6 bg-primary text-white text-center" id="contact">
-        <div class="max-w-6xl mx-auto fade-in-section">
-            
-            <h2 class="font-serif text-4xl md:text-7xl font-bold mb-6 md:mb-8 leading-tight">Let's work together.</h2>
-            <p class="text-gray-400 text-base md:text-2xl font-light mb-12 max-w-2xl mx-auto leading-relaxed px-4">
-                Whether you're starting your college journey or need help fine-tuning your essays, I'd love to help you reach your goals. 
-                <span class="text-accent block mt-4 font-medium">Reach out via email, phone, or LinkedIn to get started.</span>
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 items-center justify-items-center text-lg md:text-xl">
-                <!-- Email -->
-                <a href="mailto:mirazschubert@gmail.com" class="group flex flex-row items-center gap-4 hover:text-accent transition-all duration-300 w-full max-w-[280px] md:max-w-none md:justify-center">
-                    <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 border border-gray-600 rounded-full flex items-center justify-center group-hover:border-accent group-hover:scale-110 group-hover:bg-accent/10 transition-all duration-300">
-                        <i class="fa-regular fa-envelope text-xl md:text-2xl group-hover:scale-110 transition-transform"></i>
-                    </div>
-                    <div class="text-left">
-                        <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mb-0.5 md:mb-1 group-hover:text-accent transition-colors">Email</p>
-                        <p class="font-medium text-sm md:text-lg break-all">mirazschubert@gmail.com</p>
-                    </div>
-                </a>
-                
-                <!-- Phone -->
-                <a href="tel:+19294048295" class="group flex flex-row items-center gap-4 hover:text-accent transition-all duration-300 w-full max-w-[280px] md:max-w-none md:justify-center">
-                    <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 border border-gray-600 rounded-full flex items-center justify-center group-hover:border-accent group-hover:scale-110 group-hover:bg-accent/10 transition-all duration-300">
-                        <i class="fa-solid fa-phone text-xl md:text-2xl group-hover:scale-110 transition-transform"></i>
-                    </div>
-                    <div class="text-left">
-                        <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mb-0.5 md:mb-1 group-hover:text-accent transition-colors">Phone</p>
-                        <p class="font-medium text-sm md:text-lg">+1 (929) 404-8295</p>
-                    </div>
-                </a>
+  on(el, ev, fn, opts) {
+    if (!el) return;
+    el.addEventListener(ev, fn, opts);
+    this._cleanup.push(() => el.removeEventListener(ev, fn, opts));
+  }
 
-                <!-- LinkedIn -->
-                <a href="https://www.linkedin.com/in/mira-schubert" target="_blank" class="group flex flex-row items-center gap-4 hover:text-accent transition-all duration-300 w-full max-w-[280px] md:max-w-none md:justify-center">
-                    <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 border border-gray-600 rounded-full flex items-center justify-center group-hover:border-accent group-hover:scale-110 group-hover:bg-accent/10 transition-all duration-300">
-                        <i class="fa-brands fa-linkedin-in text-xl md:text-2xl group-hover:scale-110 transition-transform"></i>
-                    </div>
-                    <div class="text-left">
-                        <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mb-0.5 md:mb-1 group-hover:text-accent transition-colors">LinkedIn</p>
-                        <p class="font-medium text-sm md:text-lg">mira-schubert</p>
-                    </div>
-                </a>
-            </div>
+  componentDidMount() {
+    this._cleanup = [];
+    this.mouse = { x: -9999, y: -9999 };
+    const p = this.props || {};
+    this.accent = p.accent || '#C2693F';
+    this.reduce = !!p.reduceMotion;
+    this.root = this.rootRef.current;
+    if (this.root) this.root.style.setProperty('--accent', this.accent);
 
-        </div>
-    </section>
+    try { this.initGrain(); } catch (e) {}
+    if (p.showGrid !== false && !this.reduce) { try { this.initGrid(); } catch (e) {} }
+    else if (this.canvasRef.current) { this.canvasRef.current.style.display = 'none'; }
+    try { this.splitName(); } catch (e) {}
+    try { this.initType(); } catch (e) {}
+    try { this.initReveal(); } catch (e) {}
+    try { this.initCount(); } catch (e) {}
+    try { this.initScramble(); } catch (e) {}
+    try { this.initProgress(); } catch (e) {}
+    try { this.initHeroCursor(); } catch (e) {}
+    try { this.initWritingHover(); } catch (e) {}
+    try { this.initMagnetic(); } catch (e) {}
+    try { this.initMobileMenu(); } catch (e) {}
+  }
 
-    <!-- Footer -->
-    <footer class="bg-primary border-t border-white/10 py-10 text-center px-6">
-        <p class="text-gray-400 font-light text-[10px] md:text-sm tracking-wide">
-            &copy; 2026 MIRA SCHUBERT | PRINCETON UNIVERSITY STUDENT
-        </p>
-    </footer>
+  componentWillUnmount() {
+    (this._cleanup || []).forEach(fn => { try { fn(); } catch (e) {} });
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._typeTO) clearTimeout(this._typeTO);
+  }
 
-    <!-- Interactive Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- Mobile Menu Logic ---
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
+  initGrain() {
+    const g = this.root.querySelector('[data-grain]');
+    if (!g) return;
+    const c = document.createElement('canvas');
+    c.width = 130; c.height = 130;
+    const x = c.getContext('2d');
+    const id = x.createImageData(130, 130);
+    for (let i = 0; i < id.data.length; i += 4) {
+      const v = Math.random() * 255;
+      id.data[i] = id.data[i + 1] = id.data[i + 2] = v;
+      id.data[i + 3] = Math.random() * 20;
+    }
+    x.putImageData(id, 0, 0);
+    g.style.backgroundImage = 'url(' + c.toDataURL() + ')';
+  }
 
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                if(mobileMenu.classList.contains('active')){
-                    icon.classList.replace('fa-bars', 'fa-xmark');
-                } else {
-                    icon.classList.replace('fa-xmark', 'fa-bars');
-                }
-            });
+  initGrid() {
+    const cv = this.canvasRef.current;
+    const hero = this.root.querySelector('[data-hero]');
+    if (!cv || !hero) return;
+    const ctx = cv.getContext('2d');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const gap = 46;
+    let pts = [];
+    const build = (w, h) => {
+      pts = [];
+      for (let y = gap; y < h; y += gap)
+        for (let x = gap; x < w; x += gap) pts.push({ bx: x, by: y, x: x, y: y });
+    };
+    const resize = () => {
+      const r = hero.getBoundingClientRect();
+      cv.width = r.width * dpr; cv.height = r.height * dpr;
+      cv.style.width = r.width + 'px'; cv.style.height = r.height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      build(r.width, r.height);
+    };
+    const dotBase = this.hexToRgba('#1A1815', 0.16);
+    const accent = this.accent;
+    const draw = () => {
+      const r = hero.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+      const t = performance.now() / 1000;
+      for (const pt of pts) {
+        const sx = Math.sin(t * 0.6 + pt.bx * 0.01) * 2;
+        const sy = Math.cos(t * 0.6 + pt.by * 0.012) * 2;
+        const dx = pt.bx - this.mouse.x, dy = pt.by - this.mouse.y;
+        const d = Math.hypot(dx, dy);
+        if (d < 150 && d > 0) {
+          const push = (150 - d) / 150 * 18;
+          pt.x = pt.bx + sx + dx / d * push;
+          pt.y = pt.by + sy + dy / d * push;
+        } else { pt.x = pt.bx + sx; pt.y = pt.by + sy; }
+        const near = d < 130;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, near ? 1.9 : 1.1, 0, 6.2832);
+        ctx.fillStyle = near ? this.hexToRgba(accent, 0.5 * (1 - d / 130) + 0.18) : dotBase;
+        ctx.fill();
+      }
+      ctx.lineWidth = 1;
+      for (let i = 0; i < pts.length; i++) {
+        const a = pts[i];
+        if (Math.hypot(a.bx - this.mouse.x, a.by - this.mouse.y) > 130) continue;
+        for (let j = i + 1; j < pts.length; j++) {
+          const b = pts[j];
+          if (Math.abs(a.bx - b.bx) <= gap + 1 && Math.abs(a.by - b.by) <= gap + 1) {
+            const dd = Math.hypot(a.x - b.x, a.y - b.y);
+            if (dd < gap * 1.7) {
+              ctx.strokeStyle = this.hexToRgba(accent, Math.max(0, 1 - dd / (gap * 1.7)) * 0.5);
+              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+            }
+          }
+        }
+      }
+      this._raf = requestAnimationFrame(draw);
+    };
+    resize();
+    this.on(window, 'resize', resize);
+    draw();
+  }
 
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('active');
-                    mobileMenuBtn.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
-                });
-            });
+  splitName() {
+    const words = this.root.querySelectorAll('[data-word]');
+    this.letters = [];
+    let gi = 0;
+    words.forEach(w => {
+      const txt = w.textContent;
+      w.textContent = '';
+      [...txt].forEach(ch => {
+        const s = document.createElement('span');
+        s.textContent = ch;
+        s.style.display = 'inline-block';
+        s.style.willChange = 'transform';
+        s.style.transition = 'transform 0.3s cubic-bezier(.2,.8,.2,1)';
+        s._d = 0.35 + ((gi++) % 6) * 0.16;
+        w.appendChild(s);
+        this.letters.push(s);
+      });
+    });
+  }
 
-            // --- Scroll Fade-in Animation ---
-            const fadeElements = document.querySelectorAll('.fade-in-section');
-            const appearOptions = {
-                threshold: 0.1,
-                rootMargin: "0px 0px -40px 0px"
-            };
+  initType() {
+    const out = this.root.querySelector('[data-type-out]');
+    if (!out) return;
+    const full = out.textContent;
+    if (this.reduce) { out.textContent = full; return; }
+    out.textContent = '';
+    let i = 0;
+    const tick = () => {
+      out.textContent = full.slice(0, i);
+      if (i <= full.length) { i++; this._typeTO = setTimeout(tick, 40); }
+    };
+    this._typeTO = setTimeout(tick, 550);
+  }
 
-            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                });
-            }, appearOptions);
+  initReveal() {
+    const els = [...this.root.querySelectorAll('[data-reveal]')];
+    els.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(26px)';
+      el.style.transition = 'opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1)';
+    });
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(en => {
+        if (en.isIntersecting) {
+          const el = en.target;
+          el.style.transitionDelay = (parseFloat(el.getAttribute('data-delay') || '0')) + 'ms';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    els.forEach(el => io.observe(el));
+    const fb = setTimeout(() => els.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }), 4000);
+    this._cleanup.push(() => { io.disconnect(); clearTimeout(fb); });
+  }
 
-            fadeElements.forEach(el => {
-                appearOnScroll.observe(el);
-            });
-        });
-    </script>
+  initCount() {
+    const els = [...this.root.querySelectorAll('[data-count]')];
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(en => {
+        if (en.isIntersecting) { this.countTo(en.target); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.5 });
+    els.forEach(el => io.observe(el));
+    this._cleanup.push(() => io.disconnect());
+  }
+
+  countTo(el) {
+    const target = parseFloat(el.getAttribute('data-count'));
+    const dec = parseInt(el.getAttribute('data-dec') || '0');
+    const dur = 1200, t0 = performance.now();
+    const step = (t) => {
+      let p = Math.min(1, (t - t0) / dur);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * p).toFixed(dec);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = target.toFixed(dec);
+    };
+    requestAnimationFrame(step);
+  }
+
+  initScramble() {
+    if (this.reduce) return;
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#*+-<>.';
+    const els = [...this.root.querySelectorAll('[data-scramble]')];
+    els.forEach(el => {
+      const final = el.textContent;
+      let iv = null;
+      const run = () => {
+        let frame = 0; const len = final.length;
+        clearInterval(iv);
+        iv = setInterval(() => {
+          let out = '';
+          for (let i = 0; i < len; i++) {
+            if (final[i] === ' ') { out += ' '; continue; }
+            out += (i < frame / 2) ? final[i] : chars[Math.floor(Math.random() * chars.length)];
+          }
+          el.textContent = out;
+          frame++;
+          if (frame / 2 >= len) { clearInterval(iv); el.textContent = final; }
+        }, 28);
+      };
+      this.on(el, 'mouseenter', run);
+      this._cleanup.push(() => clearInterval(iv));
+    });
+  }
+
+  initProgress() {
+    const bar = this.root.querySelector('[data-progress]');
+    const pcts = this.root.querySelectorAll('[data-scroll-pct]');
+    const onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+      if (bar) bar.style.transform = 'scaleX(' + p + ')';
+      pcts.forEach(e => e.textContent = String(Math.round(p * 100)).padStart(3, '0'));
+    };
+    this.on(window, 'scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  initHeroCursor() {
+    const hero = this.root.querySelector('[data-hero]');
+    const coord = this.root.querySelector('[data-coord]');
+    const cross = this.root.querySelector('[data-cross]');
+    if (!hero) return;
+    const move = (e) => {
+      const r = hero.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      this.mouse.x = x; this.mouse.y = y;
+      if (!this.reduce && this.letters) {
+        const nx = x / r.width - 0.5, ny = y / r.height - 0.5;
+        this.letters.forEach(s => { s.style.transform = 'translate(' + (nx * s._d * 24) + 'px,' + (ny * s._d * 15) + 'px)'; });
+      }
+      if (coord) coord.textContent = 'x:' + String(Math.round(x)).padStart(4, '0') + '  y:' + String(Math.round(y)).padStart(4, '0');
+      if (cross) { cross.style.opacity = '1'; cross.style.left = e.clientX + 'px'; cross.style.top = e.clientY + 'px'; }
+    };
+    const leave = () => {
+      this.mouse.x = -9999; this.mouse.y = -9999;
+      if (this.letters) this.letters.forEach(s => s.style.transform = '');
+      if (cross) cross.style.opacity = '0';
+    };
+    this.on(hero, 'mousemove', move);
+    this.on(hero, 'mouseleave', leave);
+  }
+
+  initWritingHover() {
+    const cards = [...this.root.querySelectorAll('[data-writing-card]')];
+    cards.forEach(c => {
+      const img = c.querySelector('[data-w-img]');
+      const ov = c.querySelector('[data-w-ov]');
+      this.on(c, 'mouseenter', () => {
+        c.style.transform = 'translateY(-5px)';
+        if (img) { img.style.filter = 'none'; img.style.transform = 'scale(1.04)'; }
+        if (ov) ov.style.opacity = '0';
+      });
+      this.on(c, 'mouseleave', () => {
+        c.style.transform = '';
+        if (img) { img.style.filter = 'grayscale(1) contrast(1.04) brightness(1.03) sepia(0.25)'; img.style.transform = ''; }
+        if (ov) ov.style.opacity = '0.35';
+      });
+    });
+  }
+
+  initMagnetic() {
+    if (this.reduce) return;
+    const btns = [...this.root.querySelectorAll('[data-magnetic]')];
+    btns.forEach(b => {
+      this.on(b, 'mousemove', (e) => {
+        const r = b.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
+        b.style.transform = 'translate(' + x * 0.22 + 'px,' + y * 0.3 + 'px)';
+      });
+      this.on(b, 'mouseleave', () => { b.style.transform = ''; });
+    });
+  }
+
+  initMobileMenu() {
+    const toggle = this.root.querySelector('[data-nav-toggle]');
+    const overlay = this.root.querySelector('[data-nav-overlay]');
+    if (!toggle || !overlay) return;
+    const open = () => { overlay.style.opacity = '1'; overlay.style.pointerEvents = 'auto'; overlay.style.transform = 'none'; document.body.style.overflow = 'hidden'; };
+    const close = () => { overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none'; overlay.style.transform = 'translateY(-10px)'; document.body.style.overflow = ''; };
+    this.on(toggle, 'click', open);
+    const closeBtn = overlay.querySelector('[data-nav-close]');
+    this.on(closeBtn, 'click', close);
+    overlay.querySelectorAll('a').forEach(a => this.on(a, 'click', close));
+    this.on(window, 'keydown', (e) => { if (e.key === 'Escape') close(); });
+  }
+}
+</script>
 </body>
 </html>
